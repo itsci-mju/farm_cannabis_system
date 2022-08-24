@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.itsci.it411_asynctask">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ReceiptActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListRegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReportOrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReportPlantingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditHarvestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListHarvestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditProgressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditOrderStatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListAllOrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListOrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListProgressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditPlantingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddProgressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddHarvestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListPlantingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddPlantingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProductActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="true" />
+    </application>
+
+</manifest>

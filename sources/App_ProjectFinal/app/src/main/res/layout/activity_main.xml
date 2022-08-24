@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_menubar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#4EBF37"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        app:srcCompat="@drawable/mju_logo_svg" />
+
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="ติดตามการปลูกและสั่งจอง กัญชง กัญชา"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView24"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="มหาวิทยาลัยแม่โจ้" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:orientation="vertical"
+                    android:padding="30dp">
+
+                    <TextView
+                        android:id="@+id/textView98"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="กัญชง VS กัญชา"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView107"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="กัญชา"
+                        android:textColor="#000000"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView101"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=" ▪️ กัญชามีชื่อภาษาอังกฤษ เรียกว่า Marijuana \n ▪️ รูปร่าง ลำต้น >> ลำต้นมักจะมีลักษณะเตี้ยและเป็นพุ่ม ต้นกัญชาจะแตกกิ่งก้านค่อนข้างมากเมื่อเทียบกับกัญชง ส่วนใบก็สีเขียวจัดจะมีประมาณ 5-7 แฉก \n ▪️ ส่วนต่าง ๆ ของกัญชาที่ไม่จัดเป็นยาเสพติด ได้แก่ เปลือก ลำต้น เส้นใย กิ่งก้าน ราก ใบ ซึ่งไม่มียอดหรือช่อดอกติดมาด้วย \n ▪️ กัญชา มีสารให้ความเมา THC (Tetrahydrocannabinol) มากกว่า 1% ลดอาการคลื่นไส้อาเจียนจากการได้รับเคมีบำบัด ลดอาการปวด รักษาโรคลมชัก ช่วยผ่อนคลาย \n ▪️ สารแคนนาบินอล (Cannabinol : CBD) มีคุณสมบัติในการช่วยลดอาการเจ็บปวด ลดการอักเสบของแผล ยับยั้งการเจริญเติบโตของเซลล์มะเร็ง"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/textView108"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="กัญชง"
+                        android:textColor="#000000"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView102"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=" ▪️ กัญชงมีชื่อภาษาอังกฤษ เรียกว่า Hemp \n ▪️ รูปร่าง ลำต้น >> ต้นกัญชงมักจะสูงกว่า ในส่วนของใบกัญชงจะมีขนาดใหญ่กว่ากัญชา มีการเรียงสลับของใบที่ห่างกัน ลักษณะของใบกัญชงจะมีประมาณ 7-11 แฉก โดยสีของใบกัญชงจะเป็นเขียวอ่อน \n ▪️ กัญชงที่ไม่จัดเป็นยาเสพติด ได้แก่ เปลือก ลำต้น เส้นใย กิ่งก้าน ราก ใบ ซึ่งไม่มียอดหรือช่อดอกติดมาด้วย \n ▪️ กัญชง มีสารสำคัญ ทั้ง THC (Tetrahydrocannabinol) และ CBD (Cannabinol ) ต่ำมาก จึงไม่ได้จัดอยู่ในประเภทยาเสพติด \n ▪️ มีเส้นใยคุณภาพสูงมักถูกนำมาใช้ในอุตสาหกรรมการแปรรูป เช่น เสื้อผ้า, เยื่อกระดาษ, เชือก เป็นต้น โดยมีความแข็งแรงของเส้นใยมากกว่าฝ้ายถึง 2 เท่า "
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/textView109"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="ทั้งกัญชาและกัญชงเป็นพืชชนิดเดียวกัน มีลักษณะภายนอกแตกต่างกันน้อยมาก แต่สามารถสังเกตในเบื้องต้นได้คือ กัญชงมีใบแคบเรียวและสีเขียวอ่อนกว่า มีลำต้นสูงและแตกกิ่งก้านน้อยกว่า ช่อดอกมียางน้อยกว่ากัญชา จึงมีการนำกัญชงไปใช้เป็นพืชเส้นใยสำหรับทำเสื้อผ้าและเยื่อกระดาษ"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/textView111"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="ถ้าต้องการจำแนกให้ลึกลงไป ให้พิจารณาจากสารประกอบที่เรียกว่าแคนนาบินอยด์ (Cannabinoid) โดยเฉพาะ สารที่ออกฤทธิ์ต่อจิตประสาท นั่นคือ THC (Delta-9-Tetrahydrocannabinol) และสารสำคัญอีกชนิดคือ CBD (Cannabidiol) ซึ่งช่วยยับยั้งการออกฤทธิ์ของ THC ถ้าต้นที่มีสาร THC น้อยกว่า 0.3 เปอร์เซ็นต์ต่อน้ำหนักแห้ง จะถือว่าเป็น Hemp หรือกัญชง แต่ถ้ามีค่า THC สูงกว่านี้ถือว่าเป็น Marijuana หรือกัญชา กรณีใช้ทางการแพทย์ต้องสกัดสาร THC, CBD รวมถึงสารประกอบแคนนาบินอยด์อื่นๆ ออกมาจากต้น ซึ่งแตกต่างจากการเสพกัญชาที่ใช้ส่วนต่าง ๆ ของพืชโดยตรง"
+                        android:textColor="#000000" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_menubar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#C6BCBC"
+        android:backgroundTint="#9C7C7C"
+        android:backgroundTintMode="add"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/btnHomePage"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:gravity="center"
+            android:onClick="onClickHomePage"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:srcCompat="@drawable/home" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnProductPage"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="138dp"
+            android:layout_marginTop="3dp"
+            android:gravity="center"
+            android:onClick="onClickProductPage"
+            android:orientation="vertical"
+            tools:layout_marginBottom="3dp">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:srcCompat="@drawable/cannabis_stroke" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Products"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:gravity="center"
+            android:onClick="onClickProfile"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:srcCompat="@drawable/user_stroke" />
+
+            <TextView
+                android:id="@+id/txtusername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnMenuPage"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_weight="1"
+            android:gravity="center|top"
+            android:onClick="onClickMenuPage"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/menu_icon_stroke" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
