@@ -27,6 +27,7 @@ public class PaymentModel {
     public class Payment {
         String paymentID;
         String paydate;
+        String paytime;
         String amount;
         String imgPayment;
         String order;
@@ -45,6 +46,14 @@ public class PaymentModel {
 
         public void setPaydate(String paydate) {
             this.paydate = paydate;
+        }
+
+        public String getPaytime() {
+            return paytime;
+        }
+
+        public void setPaytime(String paytime) {
+            this.paytime = paytime;
         }
 
         public String getAmount() {

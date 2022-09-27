@@ -4,7 +4,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,24 +11,17 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itsci.manager.WSManager;
 import com.itsci.model.HarvestModel;
 import com.itsci.model.HarvestModel2;
-import com.itsci.model.PlantingModel;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.List;
 
 public class AddHarvestActivity extends AppCompatActivity {
     String[] list_partName = {"ใบ","ราก","ลำต้น","ยอดอ่อน"};
@@ -45,15 +37,6 @@ public class AddHarvestActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String plantid = intent.getStringExtra("plantid");
-        String plantingdate = intent.getStringExtra("plantingdate");
-        String pay = intent.getStringExtra("pay");
-        String discard = intent.getStringExtra("discard");
-        String plant = intent.getStringExtra("plant");
-        String area = intent.getStringExtra("area");
-        String unit = intent.getStringExtra("unit");
-        String cropid = intent.getStringExtra("cropid");
-        String how_plant = intent.getStringExtra("how_plant");
-        String note = intent.getStringExtra("note");
 
         TextView txtid = findViewById(R.id.txtid);
         txtid.setText(plantid);
@@ -81,7 +64,7 @@ public class AddHarvestActivity extends AppCompatActivity {
             TextView partname = v.findViewById(R.id.partname);
             partname.setText(list_partName[i]);
 
-            TextView txtunit = v.findViewById(R.id.unit);
+            TextView txtunit = v.findViewById(R.id.sumprice);
 
             txtunit.setText("กิโลกรัม");
 
@@ -161,7 +144,7 @@ public class AddHarvestActivity extends AppCompatActivity {
                 }
             }
         }, mYear, mMonth, mDay);
-
+        dpd.getDatePicker().setMaxDate(c.getTimeInMillis());
         dpd.show();
     }
 
@@ -234,7 +217,7 @@ public class AddHarvestActivity extends AppCompatActivity {
                             EditText txtharvestdate = findViewById(R.id.txtharvestdate);
                             TextView partname = v.findViewById(R.id.partname);
                             EditText qty = v.findViewById(R.id.qty);
-                            TextView unit = v.findViewById(R.id.unit);
+                            TextView unit = v.findViewById(R.id.sumprice);
                             EditText txtnote = findViewById(R.id.txtnote);
                             TextView txtplantid = findViewById(R.id.txtid);
 

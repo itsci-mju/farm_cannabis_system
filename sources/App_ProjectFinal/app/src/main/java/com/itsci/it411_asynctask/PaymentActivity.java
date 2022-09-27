@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.itsci.ImageUtil;
@@ -59,6 +61,8 @@ public class PaymentActivity extends AppCompatActivity {
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
+        int hour = c.get(Calendar.HOUR);
+        int minute = c.get(Calendar.MINUTE);
 
         EditText edt = findViewById(R.id.txtpaydate);
         if((month+1) < 10 && day < 10) {
@@ -69,6 +73,17 @@ public class PaymentActivity extends AppCompatActivity {
             edt.setText("0" + day + "-" + (month+1) + "-" + year);
         }else {
             edt.setText(day + "-" + (month+1) + "-" + year);
+        }
+
+        EditText edt2 = findViewById(R.id.txtpaytime);
+        if(hour < 10 && minute < 10) {
+            edt2.setText("0" + hour + ":0" + minute);
+        }else if(hour < 10 && minute >= 10){
+            edt2.setText("0" + hour + ":" + minute);
+        }else if(hour >= 10 && minute < 10){
+            edt2.setText("0" + hour + ":" + minute);
+        }else {
+            edt2.setText(hour + ":" + minute);
         }
 
         Intent intent = getIntent();
@@ -266,15 +281,41 @@ public class PaymentActivity extends AppCompatActivity {
         dpd.show();
     }
 
+    public void onClickPayTime(View view){
+        final Calendar c = Calendar.getInstance();
+        int mHour = c.get(Calendar.HOUR);
+        int mMinute = c.get(Calendar.MINUTE);
+
+        TimePickerDialog tpd = new TimePickerDialog(PaymentActivity.this, android.R.style.Theme_Holo_Dialog, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                EditText edt = findViewById(R.id.txtpaytime);
+                if(hourOfDay < 10 && minute < 10) {
+                    edt.setText("0" + hourOfDay + ":0" + minute);
+                }else if(hourOfDay < 10 && minute >= 10){
+                    edt.setText("0" + hourOfDay + ":" + minute);
+                }else if(hourOfDay >= 10 && minute < 10){
+                    edt.setText("0" + hourOfDay + ":" + minute);
+                }else {
+                    edt.setText(hourOfDay + ":" + minute);
+                }
+            }
+        }, mHour, mMinute, true);
+
+        tpd.show();
+    }
+
     public void onSubmitPayment(View view){
         EditText imgPaymentUri = findViewById(R.id.imgPaymentUri);
         EditText txtpaydate = findViewById(R.id.txtpaydate);
+        EditText txtpaytime = findViewById(R.id.txtpaytime);
 
         imgPaymentUri.setError(null);
         txtpaydate.setError(null);
 
         String imgPayment = imgPaymentUri.getText().toString().trim();
         String paydate = txtpaydate.getText().toString().trim();
+        String paytime = txtpaytime.getText().toString().trim();
 
         if(imgPayment.equals("") || paydate.equals("")){
             if(imgPayment.equals("")){
@@ -288,9 +329,16 @@ public class PaymentActivity extends AppCompatActivity {
             }else{
                 txtpaydate.setError(null);
             }
+
+            if(paytime.equals("")){
+                txtpaytime.setError("กรุณาเลือกเวลาที่ชำระเงิน");
+            }else{
+                txtpaytime.setError(null);
+            }
         }else{
             imgPaymentUri.setError(null);
             txtpaydate.setError(null);
+            txtpaytime.setError(null);
 
             final ProgressDialog loadingDialog = ProgressDialog.show(this, "Please wait", "Loading...", true, false);
 
@@ -310,6 +358,7 @@ public class PaymentActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     EditText txtpaydate = findViewById(R.id.txtpaydate);
+                    EditText txtpaytime = findViewById(R.id.txtpaytime);
                     final EditText imgPaymentUri = findViewById(R.id.imgPaymentUri);
                     Intent intent = getIntent();
                     final String orderid =  intent.getStringExtra("orderid");
@@ -318,6 +367,7 @@ public class PaymentActivity extends AppCompatActivity {
                     paymentModel.getPayment().setPaymentID(String.valueOf(list.length+1));
                     paymentModel.getPayment().setAmount(String.valueOf(price.doubleValue()));
                     paymentModel.getPayment().setPaydate(txtpaydate.getText().toString());
+                    paymentModel.getPayment().setPaytime(txtpaytime.getText().toString());
                     paymentModel.getPayment().setImgPayment(imgPaymentUri.getText().toString());
                     paymentModel.getPayment().setOrder(orderid);
 

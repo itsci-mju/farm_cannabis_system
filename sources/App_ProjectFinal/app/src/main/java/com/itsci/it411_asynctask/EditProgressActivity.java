@@ -151,7 +151,7 @@ public class EditProgressActivity extends AppCompatActivity {
                 }
             }
         }, mYear, mMonth, mDay);
-
+        dpd.getDatePicker().setMaxDate(c.getTimeInMillis());
         dpd.show();
     }
 

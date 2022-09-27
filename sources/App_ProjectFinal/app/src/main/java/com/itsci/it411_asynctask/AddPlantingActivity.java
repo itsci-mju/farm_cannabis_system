@@ -67,15 +67,6 @@ public class AddPlantingActivity extends AppCompatActivity {
         }else {
             edt2.setText(dayOfMonth + "-" + (month2+1) + "-" + year);
         }
-
-        Spinner unit = findViewById(R.id.spinner_unit);
-
-        String[] list_unit = {"ตารางเมตร","ตารางวา","ไร่"};
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(AddPlantingActivity.this,
-                android.R.layout.select_dialog_item, list_unit);
-
-        unit.setAdapter(adapter);
     }
 
     public void onClickHomePage(View view){
@@ -145,7 +136,7 @@ public class AddPlantingActivity extends AppCompatActivity {
                 }
             }
         }, mYear, mMonth, mDay);
-
+        dpd.getDatePicker().setMaxDate(c.getTimeInMillis());
         dpd.show();
     }
 
@@ -170,7 +161,7 @@ public class AddPlantingActivity extends AppCompatActivity {
                 }
             }
         }, mYear, mMonth, mDay);
-
+        dpd.getDatePicker().setMinDate(c.getTimeInMillis());
         dpd.show();
     }
 
@@ -181,6 +172,10 @@ public class AddPlantingActivity extends AppCompatActivity {
         EditText txtdiscard = findViewById(R.id.txtdiscard);
         EditText txtplant = findViewById(R.id.txtplant);
         EditText txtarea = findViewById(R.id.txtarea);
+        EditText txtsqaure_meters = findViewById(R.id.txtsqaure_meters);
+        EditText txtsqaure_wa = findViewById(R.id.txtsqaure_wa);
+        EditText txtngar = findViewById(R.id.txtngar);
+        EditText txtrai = findViewById(R.id.txtrai);
         EditText txtcropid = findViewById(R.id.txtcropid);
         EditText txthow_plant = findViewById(R.id.txthow_plant);
         EditText txtnote = findViewById(R.id.txtnote);
@@ -201,12 +196,16 @@ public class AddPlantingActivity extends AppCompatActivity {
         String discard = txtdiscard.getText().toString().trim();
         String plant = txtplant.getText().toString().trim();
         String area = txtarea.getText().toString().trim();
+        String sqaure_meters = txtsqaure_meters.getText().toString().trim();
+        String sqaure_wa = txtsqaure_wa.getText().toString().trim();
+        String ngar = txtngar.getText().toString().trim();
+        String rai = txtrai.getText().toString().trim();
         String cropid = txtcropid.getText().toString().trim();
         String how_plant = txthow_plant.getText().toString().trim();
         String note = txtnote.getText().toString().trim();
 
         if(plantingdate.equals("") || exp_harvestDate.equals("") || pay.equals("") ||
-        discard.equals("") || plant.equals("") || area.equals("") ||
+        discard.equals("") || plant.equals("") ||
         cropid.equals("") || how_plant.equals("")){
             if(plantingdate.equals("")){
                 txtplantingdate.setError("กรุณากรอกวันที่ปลูก");
@@ -242,10 +241,12 @@ public class AddPlantingActivity extends AppCompatActivity {
                 txtplant.setError(null);
             }
 
-            if(area.equals("")) {
+            if(sqaure_meters.equals("") && sqaure_wa.equals("")
+                && ngar.equals("") && rai.equals("")){
                 txtarea.setError("กรุณากรอกพื้นที่ที่ปลูก");
-            }else if(area.equals("0")){
-                txtarea.setError("พื้นที่ที่ปลูกต้องไม่ใช่เลข 0");
+            }else if(sqaure_meters.equals("0") && sqaure_wa.equals("0")
+                    && ngar.equals("0") && rai.equals("0")){
+                txtarea.setError("พื้นที่ที่ปลูกทั้งหมดต้องไม่ใช่เลข 0");
             }else{
                 txtarea.setError(null);
             }
@@ -293,8 +294,10 @@ public class AddPlantingActivity extends AppCompatActivity {
                     TextView txtpay = findViewById(R.id.txtpay);
                     TextView txtdiscard = findViewById(R.id.txtdiscard);
                     TextView txtplant = findViewById(R.id.txtplant);
-                    TextView txtarea = findViewById(R.id.txtarea);
-                    Spinner spinner_unit = findViewById(R.id.spinner_unit);
+                    TextView txtsqaure_meters = findViewById(R.id.txtsqaure_meters);
+                    TextView txtsqaure_wa = findViewById(R.id.txtsqaure_wa);
+                    TextView txtngar = findViewById(R.id.txtngar);
+                    TextView txtrai = findViewById(R.id.txtrai);
                     TextView txtcropid = findViewById(R.id.txtcropid);
                     TextView txthow_plant = findViewById(R.id.txthow_plant);
                     TextView txtnote = findViewById(R.id.txtnote);
@@ -321,8 +324,26 @@ public class AddPlantingActivity extends AppCompatActivity {
                     plantingModel.getPlanting().setPay(txtpay.getText().toString());
                     plantingModel.getPlanting().setDiscard(txtdiscard.getText().toString());
                     plantingModel.getPlanting().setPlant(txtplant.getText().toString());
-                    plantingModel.getPlanting().setArea(txtarea.getText().toString());
-                    plantingModel.getPlanting().setUnit(spinner_unit.getSelectedItem().toString());
+                    if(txtsqaure_meters.getText().toString().equals("")){
+                        plantingModel.getPlanting().setSqaure_meters("0");
+                    }else{
+                        plantingModel.getPlanting().setSqaure_meters(txtsqaure_meters.getText().toString());
+                    }
+                    if(txtsqaure_wa.getText().toString().equals("")){
+                        plantingModel.getPlanting().setSqaure_wa("0");
+                    }else{
+                        plantingModel.getPlanting().setSqaure_wa(txtsqaure_wa.getText().toString());
+                    }
+                    if(txtngar.getText().toString().equals("")){
+                        plantingModel.getPlanting().setNgar("0");
+                    }else{
+                        plantingModel.getPlanting().setNgar(txtngar.getText().toString());
+                    }
+                    if(txtrai.getText().toString().equals("")){
+                        plantingModel.getPlanting().setRai("0");
+                    }else{
+                        plantingModel.getPlanting().setRai(txtrai.getText().toString());
+                    }
                     plantingModel.getPlanting().setCropid(txtcropid.getText().toString());
                     plantingModel.getPlanting().setHow_plant(txthow_plant.getText().toString());
                     if (txtnote.getText().toString().equals("")) {
@@ -330,6 +351,7 @@ public class AddPlantingActivity extends AppCompatActivity {
                     } else {
                         plantingModel.getPlanting().setNote(txtnote.getText().toString());
                     }
+                    plantingModel.getPlanting().setStatus("กำลังเพาะปลูก");
 
                     manager.insert_planting(plantingModel, new WSManager.WSManagerListener() {
                         @Override

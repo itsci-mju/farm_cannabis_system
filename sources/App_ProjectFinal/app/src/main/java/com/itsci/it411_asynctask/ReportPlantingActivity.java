@@ -42,6 +42,8 @@ import java.util.Locale;
 public class ReportPlantingActivity extends AppCompatActivity {
     String pattern = "MMMM";
     SimpleDateFormat sdf = new SimpleDateFormat(pattern, new Locale("th", "TH"));
+    String pattern2 = "MM";
+    SimpleDateFormat sdf2 = new SimpleDateFormat(pattern2, new Locale("th", "TH"));
 
     private PieChart pieChart;
     @Override
@@ -202,19 +204,19 @@ public class ReportPlantingActivity extends AppCompatActivity {
                     }
                 }
 
-                List<Integer> qty = new ArrayList<>();
+                List<Float> qty = new ArrayList<>();
                 for(int i = 0; i < partname.size(); i++){
-                    qty.add(0);
+                    qty.add((float) 0);
                 }
-
                 for(int i = 0; i < list.length; i++){
                     for(int j = 0; j < partname.size(); j++){
                         if(list[i].getPartName().equals(partname.get(j))){
-                            double sum = qty.get(j) + Double.parseDouble(list[i].getQty());
-                            qty.set(j, (int) sum);
+                            float sum = (float) (qty.get(j) + Double.parseDouble(list[i].getQty()));
+                            qty.set(j, (float) sum);
                         }
                     }
                 }
+
 
                 ArrayList<PieEntry> entries = new ArrayList<>();
                 for(int i = 0; i < qty.size(); i++){
@@ -248,43 +250,100 @@ public class ReportPlantingActivity extends AppCompatActivity {
 
                 LinearLayout ll = findViewById(R.id.list_detail_harvest_in_report);
                 ll.removeAllViews();
-                int id = 1;
-                for(int i = 0; i < list.length; i++){
-                    View v = getLayoutInflater().inflate(R.layout.list_detail_harvest_in_report, null);
 
+                List<String> months = new ArrayList<>();
+                List<String> months2 = new ArrayList<>();
+
+                for(int i = 0; i < list.length; i++){
+                    Date pmonth = new Date(list[i].getHarvestDate());
+                    String smonth = sdf.format(pmonth);
+                    String nmonth = sdf2.format(pmonth);
+                    if(i == 0){
+                        months.add(nmonth);
+                        months2.add(smonth);
+                    }else{
+                        boolean flag = false;
+                        for(int j = 0; j < months.size(); j++){
+                            if(nmonth.equals(months.get(j))){
+                                flag = true;
+                            }
+                        }
+                        if(flag == false){
+                            months.add(nmonth);
+                            months2.add(smonth);
+                        }
+                    }
+                }
+                Log.e("months size : ", String.valueOf(months.size()));
+                Log.e("months info : ", months.toString());
+
+                int id = 1;
+                for(int m = 0; m < months.size(); m++){
+                    View v = getLayoutInflater().inflate(R.layout.list_detail_harvest_in_report, null);
                     TextView hid = v.findViewById(R.id.hid);
                     hid.setText(String.valueOf(id));
 
                     TextView month = v.findViewById(R.id.month);
-                    Date pdate = new Date(list[i].getHarvestDate());
-                    String sdate = sdf.format(pdate);
-                    month.setText(sdate);
+                    month.setText(months2.get(m));
 
                     HarvestModel harvestModel = new HarvestModel();
-                    harvestModel.getHarvest().setHarvestID(list[i].getHarvestID());
-                    harvestModel.getHarvest().setPlanting(list[i].getPlanting().getPlantID());
+                    harvestModel.getHarvest().setHarvestID(list[m].getHarvestID());
+                    harvestModel.getHarvest().setPlanting(list[m].getPlanting().getPlantID());
 
-                    if(i == 0){
-                        id+=1;
+                    if(m == 0) {
+                        id += 1;
                         ll.addView(v);
 
-                        manager.listDetailHarvest(harvestModel, new WSManager.WSManagerListener() {
+                        manager.listHarvestByMonth(months.get(m), new WSManager.WSManagerListener() {
                             @Override
                             public void onComplete(Object response) {
                                 HarvestModel2.Harvest[] list = (HarvestModel2.Harvest[]) response;
-                                Log.e("list", String.valueOf(list.length));
-                                for(int i = 0; i < list.length; i++) {
-                                    Log.e("partname", list[i].getPartName());
+
+                                List<String> partname2 = new ArrayList<>();
+                                for(int i = 0; i < list.length; i++){
+                                    if(i == 0){
+                                        partname2.add(list[i].getPartName());
+                                    }else{
+                                        boolean flag = false;
+                                        for(int j = 0; j < partname2.size(); j++){
+                                            if(list[i].getPartName().equals(partname2.get(j))){
+                                                flag = true;
+                                            }
+                                        }
+                                        if(flag == false){
+                                            partname2.add(list[i].getPartName());
+                                        }
+                                    }
+                                    Log.e("partname2 size : ", String.valueOf(partname2.size()));
+                                    Log.e("partname2 info : ", partname2.toString());
+                                }
+
+                                List<Float> qty2 = new ArrayList<>();
+                                for(int i = 0; i < partname2.size(); i++){
+                                    qty2.add((float) 0);
+                                }
+                                for(int i = 0; i < list.length; i++){
+                                    for(int j = 0; j < partname2.size(); j++){
+                                        if(list[i].getPartName().equals(partname2.get(j))){
+                                            float sum = (float) (qty2.get(j) + Double.parseDouble(list[i].getQty()));
+                                            qty2.set(j, (float) sum);
+                                        }
+                                    }
+                                }
+                                Log.e("qty2 size : ", String.valueOf(qty2.size()));
+                                Log.e("qty2 info : ", qty2.toString());
+
+                                for (int i = 0; i < partname2.size(); i++) {
                                     final View v2 = getLayoutInflater().inflate(R.layout.list_in_list_harvest_in_report, null);
                                     LinearLayout ll2 = v.findViewById(R.id.list_in_list_harvest);
 
                                     TextView partname = v2.findViewById(R.id.partname);
-                                    partname.setText(list[i].getPartName());
+                                    partname.setText(partname2.get(i));
 
                                     TextView qty = v2.findViewById(R.id.qty);
-                                    qty.setText(list[i].getQty());
+                                    qty.setText(String.format("%.1f", qty2.get(i)));
 
-                                    TextView unit = v2.findViewById(R.id.unit);
+                                    TextView unit = v2.findViewById(R.id.sumprice);
                                     unit.setText(list[i].getUnit());
 
                                     ll2.addView(v2);
@@ -298,30 +357,60 @@ public class ReportPlantingActivity extends AppCompatActivity {
                         });
                     }else{
                         boolean flag = false;
-                        for(int j = 0; j < i; j++){
-                            if(list[i].getHarvestID().equals(list[j].getHarvestID()) && list[i].getPlanting().getPlantID().equals(list[j].getPlanting().getPlantID())) {
-                                flag = true;
-                            }
-                        }
                         if(flag == false){
-                            id+=1;
+                            id += 1;
                             ll.addView(v);
 
-                            manager.listDetailHarvest(harvestModel, new WSManager.WSManagerListener() {
+                            manager.listHarvestByMonth(months.get(m), new WSManager.WSManagerListener() {
                                 @Override
                                 public void onComplete(Object response) {
                                     HarvestModel2.Harvest[] list = (HarvestModel2.Harvest[]) response;
-                                    for(int i = 0; i < list.length; i++) {
+
+                                    List<String> partname2 = new ArrayList<>();
+                                    for(int i = 0; i < list.length; i++){
+                                        if(i == 0){
+                                            partname2.add(list[i].getPartName());
+                                        }else{
+                                            boolean flag = false;
+                                            for(int j = 0; j < partname2.size(); j++){
+                                                if(list[i].getPartName().equals(partname2.get(j))){
+                                                    flag = true;
+                                                }
+                                            }
+                                            if(flag == false){
+                                                partname2.add(list[i].getPartName());
+                                            }
+                                        }
+                                        Log.e("partname2 size : ", String.valueOf(partname2.size()));
+                                        Log.e("partname2 info : ", partname2.toString());
+                                    }
+
+                                    List<Float> qty2 = new ArrayList<>();
+                                    for(int i = 0; i < partname2.size(); i++){
+                                        qty2.add((float) 0);
+                                    }
+                                    for(int i = 0; i < list.length; i++){
+                                        for(int j = 0; j < partname2.size(); j++){
+                                            if(list[i].getPartName().equals(partname2.get(j))){
+                                                float sum = (float) (qty2.get(j) + Double.parseDouble(list[i].getQty()));
+                                                qty2.set(j, (float) sum);
+                                            }
+                                        }
+                                    }
+                                    Log.e("qty2 size : ", String.valueOf(qty2.size()));
+                                    Log.e("qty2 info : ", qty2.toString());
+
+                                    for (int i = 0; i < partname2.size(); i++) {
                                         final View v2 = getLayoutInflater().inflate(R.layout.list_in_list_harvest_in_report, null);
                                         LinearLayout ll2 = v.findViewById(R.id.list_in_list_harvest);
 
                                         TextView partname = v2.findViewById(R.id.partname);
-                                        partname.setText(list[i].getPartName());
+                                        partname.setText(partname2.get(i));
 
                                         TextView qty = v2.findViewById(R.id.qty);
-                                        qty.setText(list[i].getQty());
+                                        qty.setText(String.format("%.1f", qty2.get(i)));
 
-                                        TextView unit = v2.findViewById(R.id.unit);
+                                        TextView unit = v2.findViewById(R.id.sumprice);
                                         unit.setText(list[i].getUnit());
 
                                         ll2.addView(v2);
@@ -336,6 +425,8 @@ public class ReportPlantingActivity extends AppCompatActivity {
                         }
                     }
                 }
+
+
 
                 CardView cv_detail_planting = findViewById(R.id.cv_detail_planting);
                 LinearLayout ll_piechart_planting = findViewById(R.id.ll_piechart_planting);

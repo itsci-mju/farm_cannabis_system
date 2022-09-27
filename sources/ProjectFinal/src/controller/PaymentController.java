@@ -34,6 +34,7 @@ public class PaymentController {
 		try {
 			int paymentID = Integer.parseInt(map.get("paymentID"));
 			Date paydate = new SimpleDateFormat("dd-MM-yyyy").parse(map.get("paydate"));
+			Date paytime = new SimpleDateFormat("HH:mm").parse(map.get("paytime"));
 			double amount = Double.parseDouble(map.get("amount"));
 			String imgpayment = map.get("imgPayment");
 			String orderid = map.get("order");
@@ -43,7 +44,7 @@ public class PaymentController {
 			OrderManager om = new OrderManager();
 			Order order = om.getOrder(orderid);
 			
-			payment = new Payment(paymentID, paydate, amount, imgpayment, order);
+			payment = new Payment(paymentID, paydate, paytime, amount, imgpayment, order);
 			PaymentManager pm = new PaymentManager();
 			message = pm.insert_Payment(payment);
 			if(!imgpayment.equals("-")) {

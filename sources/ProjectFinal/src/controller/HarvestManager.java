@@ -169,4 +169,20 @@ public class HarvestManager {
 			return "failed to delete student";
 		}
 	}
+	
+	public List<Harvest> listDetailHarvestByMonth(String month) {
+		try {
+			SessionFactory sessionFactory = HibernateConnection.doHibernateConnection();
+			Session session = sessionFactory.openSession();
+			
+			session.beginTransaction();
+			List<Harvest> harvest = session.createQuery("From Harvest where MONTH(harvestDate) = '" + month + "'").list();
+			session.close();
+			System.out.println(harvest.toString());
+			return harvest;
+			
+		} catch (Exception e) {
+			return null;
+		}
+	}
 }

@@ -71,11 +71,42 @@ public class ListPlantingActivity extends AppCompatActivity {
                         TextView plant = v.findViewById(R.id.plant);
                         plant.setText(list[i].getPlant());
 
-                        TextView area = v.findViewById(R.id.area);
-                        area.setText(list[i].getArea());
+                        TextView unit1 = v.findViewById(R.id.unit1);
+                        TextView unit2 = v.findViewById(R.id.unit2);
+                        TextView unit3 = v.findViewById(R.id.unit3);
+                        TextView unit4 = v.findViewById(R.id.unit4);
 
-                        TextView unit = v.findViewById(R.id.unit);
-                        unit.setText(list[i].getUnit());
+                        TextView rai = v.findViewById(R.id.rai);
+                        if(!list[i].getRai().equals("0")){
+                            rai.setText(list[i].getRai());
+                        }else{
+                            rai.setVisibility(View.GONE);
+                            unit1.setVisibility(View.GONE);
+                        }
+
+                        TextView ngar = v.findViewById(R.id.ngar);
+                        if(!list[i].getNgar().equals("0")){
+                            ngar.setText(list[i].getNgar());
+                        }else{
+                            ngar.setVisibility(View.GONE);
+                            unit2.setVisibility(View.GONE);
+                        }
+
+                        TextView sqaure_wa = v.findViewById(R.id.sqaure_wa);
+                        if(!list[i].getSqaure_wa().equals("0")){
+                            sqaure_wa.setText(list[i].getSqaure_wa());
+                        }else{
+                            sqaure_wa.setVisibility(View.GONE);
+                            unit3.setVisibility(View.GONE);
+                        }
+
+                        TextView sqaure_meters = v.findViewById(R.id.sqaure_meters);
+                        if(!list[i].getSqaure_meters().equals("0")){
+                            sqaure_meters.setText(list[i].getSqaure_meters());
+                        }else{
+                            sqaure_meters.setVisibility(View.GONE);
+                            unit4.setVisibility(View.GONE);
+                        }
 
                         TextView cropid = v.findViewById(R.id.cropid);
                         cropid.setText(list[i].getCropid());
@@ -85,6 +116,9 @@ public class ListPlantingActivity extends AppCompatActivity {
 
                         TextView note = v.findViewById(R.id.note);
                         note.setText(list[i].getNote());
+
+                        TextView status = v.findViewById(R.id.status);
+                        status.setText(list[i].getStatus());
 
                         ll.addView(v);
                     }
@@ -107,11 +141,14 @@ public class ListPlantingActivity extends AppCompatActivity {
                         final TextView pay = v.findViewById(R.id.pay);
                         final TextView discard = v.findViewById(R.id.discard);
                         final TextView plant = v.findViewById(R.id.plant);
-                        final TextView area = v.findViewById(R.id.area);
-                        final TextView unit = v.findViewById(R.id.unit);
+                        final TextView sqaure_meters = v.findViewById(R.id.sqaure_meters);
+                        final TextView sqaure_wa = v.findViewById(R.id.sqaure_wa);
+                        final TextView ngar = v.findViewById(R.id.ngar);
+                        final TextView rai = v.findViewById(R.id.rai);
                         final TextView cropid = v.findViewById(R.id.cropid);
                         final TextView how_plant = v.findViewById(R.id.how_plant);
                         final TextView note = v.findViewById(R.id.note);
+                        final TextView status = v.findViewById(R.id.status);
 
                         btnHarvest.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -119,16 +156,6 @@ public class ListPlantingActivity extends AppCompatActivity {
                                 Intent intent = new Intent(ListPlantingActivity.this, AddHarvestActivity.class);
 
                                 intent.putExtra("plantid", id.getText().toString());
-                                intent.putExtra("plantingdate", plantingdate.getText().toString());
-                                intent.putExtra("exp_harvestDate", exp_harvestDate.getText().toString());
-                                intent.putExtra("pay", pay.getText().toString());
-                                intent.putExtra("discard", discard.getText().toString());
-                                intent.putExtra("plant", plant.getText().toString());
-                                intent.putExtra("area", area.getText().toString());
-                                intent.putExtra("unit", unit.getText().toString());
-                                intent.putExtra("cropid", cropid.getText().toString());
-                                intent.putExtra("how_plant", how_plant.getText().toString());
-                                intent.putExtra("note", note.getText().toString());
 
                                 startActivity(intent);
                             }
@@ -140,16 +167,6 @@ public class ListPlantingActivity extends AppCompatActivity {
                                 Intent intent = new Intent(ListPlantingActivity.this, ListHarvestActivity.class);
 
                                 intent.putExtra("plantid", id.getText().toString());
-                                intent.putExtra("plantingdate", plantingdate.getText().toString());
-                                intent.putExtra("exp_harvestDate", exp_harvestDate.getText().toString());
-                                intent.putExtra("pay", pay.getText().toString());
-                                intent.putExtra("discard", discard.getText().toString());
-                                intent.putExtra("plant", plant.getText().toString());
-                                intent.putExtra("area", area.getText().toString());
-                                intent.putExtra("unit", unit.getText().toString());
-                                intent.putExtra("cropid", cropid.getText().toString());
-                                intent.putExtra("how_plant", how_plant.getText().toString());
-                                intent.putExtra("note", note.getText().toString());
 
                                 startActivity(intent);
                             }
@@ -161,16 +178,6 @@ public class ListPlantingActivity extends AppCompatActivity {
                                 Intent intent = new Intent(ListPlantingActivity.this, AddProgressActivity.class);
 
                                 intent.putExtra("plantid", id.getText().toString());
-                                intent.putExtra("plantingdate", plantingdate.getText().toString());
-                                intent.putExtra("exp_harvestDate", exp_harvestDate.getText().toString());
-                                intent.putExtra("pay", pay.getText().toString());
-                                intent.putExtra("discard", discard.getText().toString());
-                                intent.putExtra("plant", plant.getText().toString());
-                                intent.putExtra("area", area.getText().toString());
-                                intent.putExtra("unit", unit.getText().toString());
-                                intent.putExtra("cropid", cropid.getText().toString());
-                                intent.putExtra("how_plant", how_plant.getText().toString());
-                                intent.putExtra("note", note.getText().toString());
 
                                 startActivity(intent);
                             }
@@ -182,16 +189,6 @@ public class ListPlantingActivity extends AppCompatActivity {
                                 Intent intent = new Intent(ListPlantingActivity.this, ListProgressActivity.class);
 
                                 intent.putExtra("plantid", id.getText().toString());
-                                intent.putExtra("plantingdate", plantingdate.getText().toString());
-                                intent.putExtra("exp_harvestDate", exp_harvestDate.getText().toString());
-                                intent.putExtra("pay", pay.getText().toString());
-                                intent.putExtra("discard", discard.getText().toString());
-                                intent.putExtra("plant", plant.getText().toString());
-                                intent.putExtra("area", area.getText().toString());
-                                intent.putExtra("unit", unit.getText().toString());
-                                intent.putExtra("cropid", cropid.getText().toString());
-                                intent.putExtra("how_plant", how_plant.getText().toString());
-                                intent.putExtra("note", note.getText().toString());
 
                                 startActivity(intent);
                             }
@@ -208,11 +205,14 @@ public class ListPlantingActivity extends AppCompatActivity {
                                 intent.putExtra("pay", pay.getText().toString());
                                 intent.putExtra("discard", discard.getText().toString());
                                 intent.putExtra("plant", plant.getText().toString());
-                                intent.putExtra("area", area.getText().toString());
-                                intent.putExtra("unit", unit.getText().toString());
+                                intent.putExtra("sqaure_meters", sqaure_meters.getText().toString());
+                                intent.putExtra("sqaure_wa", sqaure_wa.getText().toString());
+                                intent.putExtra("ngar", ngar.getText().toString());
+                                intent.putExtra("rai", rai.getText().toString());
                                 intent.putExtra("cropid", cropid.getText().toString());
                                 intent.putExtra("how_plant", how_plant.getText().toString());
                                 intent.putExtra("note", note.getText().toString());
+                                intent.putExtra("status", status.getText().toString());
 
                                 startActivity(intent);
                             }
@@ -232,11 +232,35 @@ public class ListPlantingActivity extends AppCompatActivity {
                                         plantingModel.getPlanting().setPay(pay.getText().toString());
                                         plantingModel.getPlanting().setDiscard(discard.getText().toString());
                                         plantingModel.getPlanting().setPlant(plant.getText().toString());
-                                        plantingModel.getPlanting().setArea(area.getText().toString());
-                                        plantingModel.getPlanting().setUnit(unit.getText().toString());
+
+                                        if(sqaure_meters.getText().toString().equals("")){
+                                            plantingModel.getPlanting().setSqaure_meters("0");
+                                        }else{
+                                            plantingModel.getPlanting().setSqaure_meters(sqaure_meters.getText().toString());
+                                        }
+
+                                        if(sqaure_wa.getText().toString().equals("")){
+                                            plantingModel.getPlanting().setSqaure_wa("0");
+                                        }else{
+                                            plantingModel.getPlanting().setSqaure_wa(sqaure_wa.getText().toString());
+                                        }
+
+                                        if(ngar.getText().toString().equals("")){
+                                            plantingModel.getPlanting().setNgar("0");
+                                        }else{
+                                            plantingModel.getPlanting().setNgar(ngar.getText().toString());
+                                        }
+
+                                        if(rai.getText().toString().equals("")){
+                                            plantingModel.getPlanting().setRai("0");
+                                        }else{
+                                            plantingModel.getPlanting().setRai(rai.getText().toString());
+                                        }
+
                                         plantingModel.getPlanting().setCropid(cropid.getText().toString());
                                         plantingModel.getPlanting().setHow_plant(how_plant.getText().toString());
                                         plantingModel.getPlanting().setNote(note.getText().toString());
+                                        plantingModel.getPlanting().setStatus(status.getText().toString());
 
                                         manager.delete_planting(plantingModel, new WSManager.WSManagerListener() {
                                             @Override

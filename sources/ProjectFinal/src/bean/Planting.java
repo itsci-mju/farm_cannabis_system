@@ -31,11 +31,17 @@ public class Planting {
 	@Column(name="plant", nullable=false)
 	private double plant;
 	
-	@Column(name="area", nullable=false)
-	private int area;
+	@Column(name="sqaure_meters", nullable=false)
+	private int sqaure_meters;
 	
-	@Column(name="unit", nullable=false)
-	private String unit;
+	@Column(name="sqaure_wa", nullable=false)
+	private int sqaure_wa;
+	
+	@Column(name="ngar", nullable=false)
+	private int ngar;
+	
+	@Column(name="rai", nullable=false)
+	private int rai;
 	
 	@Column(name="cropid", nullable=false)
 	private String cropid;
@@ -45,6 +51,9 @@ public class Planting {
 	
 	@Column(name="note")
 	private String note;
+	
+	@Column(name="status")
+	private String status;
 
 
 	public Planting() {
@@ -52,8 +61,10 @@ public class Planting {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Planting(int plantID, Date plantDate, Date exp_harvestDate, double pay, double discard, double plant, int area, String unit,
-			String cropid, String how_plant, String note) {
+
+	public Planting(int plantID, Date plantDate, Date exp_harvestDate, double pay, double discard, double plant,
+			int sqaure_meters, int sqaure_wa, int ngar, int rai, String cropid, String how_plant, String note,
+			String status) {
 		super();
 		this.plantID = plantID;
 		this.plantDate = plantDate;
@@ -61,100 +72,153 @@ public class Planting {
 		this.pay = pay;
 		this.discard = discard;
 		this.plant = plant;
-		this.area = area;
-		this.unit = unit;
+		this.sqaure_meters = sqaure_meters;
+		this.sqaure_wa = sqaure_wa;
+		this.ngar = ngar;
+		this.rai = rai;
 		this.cropid = cropid;
 		this.how_plant = how_plant;
 		this.note = note;
+		this.status = status;
 	}
+
 
 	public int getPlantID() {
 		return plantID;
 	}
 
+
 	public void setPlantID(int plantID) {
 		this.plantID = plantID;
 	}
+
 
 	public Date getPlantDate() {
 		return plantDate;
 	}
 
+
 	public void setPlantDate(Date plantDate) {
 		this.plantDate = plantDate;
 	}
-	
+
+
 	public Date getExp_harvestDate() {
 		return exp_harvestDate;
 	}
+
 
 	public void setExp_harvestDate(Date exp_harvestDate) {
 		this.exp_harvestDate = exp_harvestDate;
 	}
 
+
 	public double getPay() {
 		return pay;
 	}
+
 
 	public void setPay(double pay) {
 		this.pay = pay;
 	}
 
+
 	public double getDiscard() {
 		return discard;
 	}
+
 
 	public void setDiscard(double discard) {
 		this.discard = discard;
 	}
 
+
 	public double getPlant() {
 		return plant;
 	}
+
 
 	public void setPlant(double plant) {
 		this.plant = plant;
 	}
 
-	public int getArea() {
-		return area;
+
+	public int getSqaure_meters() {
+		return sqaure_meters;
 	}
 
-	public void setArea(int area) {
-		this.area = area;
+
+	public void setSqaure_meters(int sqaure_meters) {
+		this.sqaure_meters = sqaure_meters;
 	}
 
-	public String getUnit() {
-		return unit;
+
+	public int getSqaure_wa() {
+		return sqaure_wa;
 	}
 
-	public void setUnit(String unit) {
-		this.unit = unit;
+
+	public void setSqaure_wa(int sqaure_wa) {
+		this.sqaure_wa = sqaure_wa;
 	}
+
+
+	public int getNgar() {
+		return ngar;
+	}
+
+
+	public void setNgar(int ngar) {
+		this.ngar = ngar;
+	}
+
+
+	public int getRai() {
+		return rai;
+	}
+
+
+	public void setRai(int rai) {
+		this.rai = rai;
+	}
+
 
 	public String getCropid() {
 		return cropid;
 	}
 
+
 	public void setCropid(String cropid) {
 		this.cropid = cropid;
 	}
+
 
 	public String getHow_plant() {
 		return how_plant;
 	}
 
+
 	public void setHow_plant(String how_plant) {
 		this.how_plant = how_plant;
 	}
+
 
 	public String getNote() {
 		return note;
 	}
 
+
 	public void setNote(String note) {
 		this.note = note;
 	}
-	
-	
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 }

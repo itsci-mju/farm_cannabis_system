@@ -21,7 +21,7 @@ public class UserManager {
 
 			Session session = sessionFactory.openSession();
 			Transaction t = session.beginTransaction();
-			session.saveOrUpdate(user);
+			session.save(user);
 			t.commit();
 			session.close();
 			return "successfully saved";
@@ -101,6 +101,22 @@ public class UserManager {
 	}
 	
 	public User getUserByUsername(String username) {
+		try {
+			SessionFactory sessionFactory = HibernateConnection.doHibernateConnection();
+			Session session = sessionFactory.openSession();
+			
+			session.beginTransaction();
+			User user = (User) session.createQuery("From User where username = '" + username + "'").getSingleResult();
+			session.close();
+			
+			return user;
+			
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	public User checkDuplicateUsername(String username) {
 		try {
 			SessionFactory sessionFactory = HibernateConnection.doHibernateConnection();
 			Session session = sessionFactory.openSession();

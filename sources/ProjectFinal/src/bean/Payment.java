@@ -21,6 +21,9 @@ public class Payment {
 	@Column(name="paydate", nullable=false)
 	private Date paydate;
 	
+	@Column(name="paytime", nullable=false)
+	private Date paytime;
+	
 	@Column(name="amount", nullable=false)
 	private double amount;
 	
@@ -36,10 +39,11 @@ public class Payment {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Payment(int paymentID, Date paydate, double amount, String imgPayment, Order order) {
+	public Payment(int paymentID, Date paydate, Date paytime, double amount, String imgPayment, Order order) {
 		super();
 		this.paymentID = paymentID;
 		this.paydate = paydate;
+		this.paytime = paytime;
 		this.amount = amount;
 		this.imgPayment = imgPayment;
 		this.order = order;
@@ -59,6 +63,14 @@ public class Payment {
 
 	public void setPaydate(Date paydate) {
 		this.paydate = paydate;
+	}
+
+	public Date getPaytime() {
+		return paytime;
+	}
+
+	public void setPaytime(Date paytime) {
+		this.paytime = paytime;
 	}
 
 	public double getAmount() {
@@ -84,6 +96,7 @@ public class Payment {
 	public void setOrder(Order order) {
 		this.order = order;
 	}
+
 	
 	
 }

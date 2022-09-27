@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/conn/HibernateConnection.java=UTF-8
+encoding//src/controller/OrderManager.java=UTF-8
+encoding//src/controller/RequestRegisterManager.java=UTF-8
 encoding//src/service/Base64ToMultipartFile.java=UTF-8

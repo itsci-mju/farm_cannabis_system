@@ -4,20 +4,15 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,7 +81,7 @@ public class EditHarvestActivity extends AppCompatActivity {
                         }
                     }
 
-                    TextView txtunit = v.findViewById(R.id.unit);
+                    TextView txtunit = v.findViewById(R.id.sumprice);
 
                     txtunit.setText("กิโลกรัม");
 
@@ -177,7 +172,7 @@ public class EditHarvestActivity extends AppCompatActivity {
                 }
             }
         }, mYear, mMonth, mDay);
-
+        dpd.getDatePicker().setMaxDate(c.getTimeInMillis());
         dpd.show();
     }
 
@@ -247,7 +242,7 @@ public class EditHarvestActivity extends AppCompatActivity {
                     txtharvestdate = findViewById(R.id.txtharvestdate);
                     final TextView partname = v.findViewById(R.id.partname);
                     final EditText qty = v.findViewById(R.id.qty);
-                    final TextView unit = v.findViewById(R.id.unit);
+                    final TextView unit = v.findViewById(R.id.sumprice);
                     txtnote = findViewById(R.id.txtnote);
                     final TextView txtplantid = findViewById(R.id.txtid);
 

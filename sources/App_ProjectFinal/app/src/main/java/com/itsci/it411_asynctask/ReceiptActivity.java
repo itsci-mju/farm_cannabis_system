@@ -69,7 +69,7 @@ public class ReceiptActivity extends AppCompatActivity {
                             TextView no = findViewById(R.id.no);
                             no.setText(payment.getPaymentID());
 
-                            TextView paydate = findViewById(R.id.paydate);
+                            TextView paydate = findViewById(R.id.paydatetime);
                             Date dpaydate = new Date(payment.getPaydate());
                             String spaydate = sdf.format(dpaydate);
                             paydate.setText(spaydate);

@@ -10,9 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,9 +19,6 @@ import android.widget.Toast;
 import com.itsci.manager.WSManager;
 import com.itsci.model.HarvestModel;
 import com.itsci.model.HarvestModel2;
-import com.itsci.model.OrderDetailModel2;
-import com.itsci.model.PlantingProgressModel;
-import com.itsci.model.PlantingProgressModel2;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -97,7 +92,7 @@ public class ListHarvestActivity extends AppCompatActivity {
                                         TextView qty = v2.findViewById(R.id.qty);
                                         qty.setText(list[i].getQty());
 
-                                        TextView unit = v2.findViewById(R.id.unit);
+                                        TextView unit = v2.findViewById(R.id.sumprice);
                                         unit.setText(list[i].getUnit());
 
                                         ll2.addView(v2);
@@ -133,7 +128,7 @@ public class ListHarvestActivity extends AppCompatActivity {
                                             TextView qty = v2.findViewById(R.id.qty);
                                             qty.setText(list[i].getQty());
 
-                                            TextView unit = v2.findViewById(R.id.unit);
+                                            TextView unit = v2.findViewById(R.id.sumprice);
                                             unit.setText(list[i].getUnit());
 
                                             ll2.addView(v2);

@@ -166,7 +166,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
-                                        android:text="ปริมาณรับจ่ายสิ่งที่ปลูก" />
+                                        android:text="ปริมาณรับจ่ายสิ่งที่ปลูก (ต้น)" />
 
                                     <TextView
                                         android:id="@+id/txtqtypay"
@@ -199,7 +199,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
-                                        android:text="คัดทิ้ง" />
+                                        android:text="คัดทิ้ง (ต้น)" />
 
                                     <TextView
                                         android:id="@+id/txtqtydiscard"
@@ -246,7 +246,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
-                                        android:text="ต้นกล้าที่ปลูก" />
+                                        android:text="ต้นกล้าที่ปลูก (ต้น)" />
 
                                     <TextView
                                         android:id="@+id/txtqtyplant"

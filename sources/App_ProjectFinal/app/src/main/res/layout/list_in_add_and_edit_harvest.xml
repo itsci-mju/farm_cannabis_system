@@ -28,7 +28,7 @@
             android:inputType="numberDecimal" />
 
         <TextView
-            android:id="@+id/unit"
+            android:id="@+id/sumprice"
             android:layout_width="95dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"

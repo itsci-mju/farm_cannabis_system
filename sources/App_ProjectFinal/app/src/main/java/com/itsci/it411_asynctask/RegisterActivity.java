@@ -230,7 +230,7 @@ public class RegisterActivity extends AppCompatActivity {
                 txttelephone.equals("") || txtusername.equals("") ||
                 txtpassword.equals("") || txtimgIDcardUri.equals("")) {
 
-            String fullnameregex = "^[A-Za-zก-์]{2,100}(\\s){1}[A-Za-zก-์]{2,50}(\\s){0,1}[A-Za-zก-์]{0,50}";
+            String fullnameregex = "^[A-Za-zก-์]{2,100}(\\s){1}[A-Za-zก-์]{1,50}(\\s){0,1}[A-Za-zก-์]{0,50}";
 
             if (txtfullname.equals("")) {
                 fullname.setError("กรุณากรอกชื่อ - นามสกุล");
@@ -326,77 +326,93 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                     reqregModel.getRequestRegister().setStatus("รอการยืนยัน");
 
-                    manager.insert_Register(reqregModel, new WSManager.WSManagerListener() {
+                    manager.check_duplicate_username(username.getText().toString(), new WSManager.WSManagerListener() {
                         @Override
                         public void onComplete(Object response) {
-                            userModel.getUser().setFullname(fullname.getText().toString());
-                            userModel.getUser().setUsername(username.getText().toString());
-                            userModel.getUser().setPassword(password.getText().toString());
+                            if(response.toString().equals("duplicate")){
+                                Toast.makeText(RegisterActivity.this, "ชื่อผู้ใช้ซ้ำ ไม่สามารถใช้ชื่อนี้ได้", Toast.LENGTH_SHORT).show();
+                                loadingDialog.dismiss();
+                            }else{
+                                manager.insert_Register(reqregModel, new WSManager.WSManagerListener() {
+                                    @Override
+                                    public void onComplete(Object response) {
+                                        userModel.getUser().setFullname(fullname.getText().toString());
+                                        userModel.getUser().setUsername(username.getText().toString());
+                                        userModel.getUser().setPassword(password.getText().toString());
 
-                            manager.insert_User(userModel, new WSManager.WSManagerListener() {
-                                @Override
-                                public void onComplete(Object response) {
-                                    manager.listCustomer(customerModel2, new WSManager.WSManagerListener() {
-                                        @Override
-                                        public void onComplete(Object response) {
-                                            CustomerModel2.Customer[] listcustomer = (CustomerModel2.Customer[]) response;
+                                        manager.insert_User(userModel, new WSManager.WSManagerListener() {
+                                            @Override
+                                            public void onComplete(Object response) {
+                                                manager.listCustomer(customerModel2, new WSManager.WSManagerListener() {
+                                                    @Override
+                                                    public void onComplete(Object response) {
+                                                        CustomerModel2.Customer[] listcustomer = (CustomerModel2.Customer[]) response;
 
-                                            CustomerModel customerModel = new CustomerModel();
-                                            customerModel.getCustomer().setCustomerID(String.valueOf(listcustomer.length+1));
-                                            customerModel.getCustomer().setCompany(company.getText().toString());
-                                            customerModel.getCustomer().setAddress(address.getText().toString());
-                                            customerModel.getCustomer().setMobileNo(telephone.getText().toString());
-                                            if(imgIDcardUri.getText().toString().trim().equals("")){
-                                                customerModel.getCustomer().setImgIDCard("-");
-                                            }else{
-                                                customerModel.getCustomer().setImgIDCard(imgIDcardUri.getText().toString());
+                                                        CustomerModel customerModel = new CustomerModel();
+                                                        customerModel.getCustomer().setCustomerID(String.valueOf(listcustomer.length+1));
+                                                        customerModel.getCustomer().setCompany(company.getText().toString());
+                                                        customerModel.getCustomer().setAddress(address.getText().toString());
+                                                        customerModel.getCustomer().setMobileNo(telephone.getText().toString());
+                                                        if(imgIDcardUri.getText().toString().trim().equals("")){
+                                                            customerModel.getCustomer().setImgIDCard("-");
+                                                        }else{
+                                                            customerModel.getCustomer().setImgIDCard(imgIDcardUri.getText().toString());
+                                                        }
+                                                        if(imgCertificateUri.getText().toString().trim().equals("")){
+                                                            customerModel.getCustomer().setImgCertificate("-");
+                                                        }else{
+                                                            customerModel.getCustomer().setImgCertificate(imgCertificateUri.getText().toString());
+                                                        }
+                                                        customerModel.getCustomer().setReqreg(reqregModel.getRequestRegister().getReqregid());
+                                                        customerModel.getCustomer().setUser(userModel.getUser().getUsername());
+
+                                                        manager.insert_Customer(customerModel, new WSManager.WSManagerListener() {
+                                                            @Override
+                                                            public void onComplete(Object response) {
+                                                                Toast.makeText(RegisterActivity.this, "ิยินดีต้อนรับสมาชิกใหม่ ลงทะเบียนสำเร็จเรียบร้อย", Toast.LENGTH_SHORT).show();
+
+                                                                EditText username = findViewById(R.id.username);
+                                                                EditText password = findViewById(R.id.password);
+
+                                                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                                                intent.putExtra("username", username.getText().toString());
+                                                                intent.putExtra("password", password.getText().toString());
+                                                                startActivity(intent);
+                                                                loadingDialog.dismiss();
+                                                            }
+
+                                                            @Override
+                                                            public void onError(String err) {
+                                                                Toast.makeText(RegisterActivity.this, "ไม่สามารถทำการสมัครสมาชิกได้", Toast.LENGTH_SHORT).show();
+                                                                loadingDialog.dismiss();
+                                                            }
+                                                        });
+                                                    }
+
+                                                    @Override
+                                                    public void onError(String err) {
+                                                        Toast.makeText(RegisterActivity.this, "ไม่สามารถทำการสมัครสมาชิกได้", Toast.LENGTH_SHORT).show();
+                                                        loadingDialog.dismiss();
+                                                    }
+                                                });
+
                                             }
-                                            if(imgCertificateUri.getText().toString().trim().equals("")){
-                                                customerModel.getCustomer().setImgCertificate("-");
-                                            }else{
-                                                customerModel.getCustomer().setImgCertificate(imgCertificateUri.getText().toString());
+
+                                            @Override
+                                            public void onError(String err) {
+                                                Toast.makeText(RegisterActivity.this, "ไม่สามารถทำการสมัครสมาชิกได้", Toast.LENGTH_SHORT).show();
+                                                loadingDialog.dismiss();
                                             }
-                                            customerModel.getCustomer().setReqreg(reqregModel.getRequestRegister().getReqregid());
-                                            customerModel.getCustomer().setUser(userModel.getUser().getUsername());
+                                        });
+                                    }
 
-                                            manager.insert_Customer(customerModel, new WSManager.WSManagerListener() {
-                                                @Override
-                                                public void onComplete(Object response) {
-                                                    Toast.makeText(RegisterActivity.this, "ิยินดีต้อนรับสมาชิกใหม่ ลงทะเบียนสำเร็จเรียบร้อย", Toast.LENGTH_SHORT).show();
-
-                                                    EditText username = findViewById(R.id.username);
-                                                    EditText password = findViewById(R.id.password);
-
-                                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                                    intent.putExtra("username", username.getText().toString());
-                                                    intent.putExtra("password", password.getText().toString());
-                                                    startActivity(intent);
-                                                    loadingDialog.dismiss();
-                                                }
-
-                                                @Override
-                                                public void onError(String err) {
-                                                    Toast.makeText(RegisterActivity.this, "ไม่สามารถทำการสมัครสมาชิกได้", Toast.LENGTH_SHORT).show();
-                                                    loadingDialog.dismiss();
-                                                }
-                                            });
-                                        }
-
-                                        @Override
-                                        public void onError(String err) {
-                                            Toast.makeText(RegisterActivity.this, "ไม่สามารถทำการสมัครสมาชิกได้", Toast.LENGTH_SHORT).show();
-                                            loadingDialog.dismiss();
-                                        }
-                                    });
-
-                                }
-
-                                @Override
-                                public void onError(String err) {
-                                    Toast.makeText(RegisterActivity.this, "ไม่สามารถทำการสมัครสมาชิกได้", Toast.LENGTH_SHORT).show();
-                                    loadingDialog.dismiss();
-                                }
-                            });
+                                    @Override
+                                    public void onError(String err) {
+                                        Toast.makeText(RegisterActivity.this, "ไม่สามารถทำการสมัครสมาชิกได้", Toast.LENGTH_SHORT).show();
+                                        loadingDialog.dismiss();
+                                    }
+                                });
+                            }
                         }
 
                         @Override

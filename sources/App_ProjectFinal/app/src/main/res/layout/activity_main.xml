@@ -62,6 +62,13 @@
                     android:orientation="vertical"
                     android:padding="30dp">
 
+                    <ImageView
+                        android:id="@+id/imageView26"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_marginBottom="20dp"
+                        app:srcCompat="@drawable/daily_plants" />
+
                     <TextView
                         android:id="@+id/textView98"
                         android:layout_width="match_parent"

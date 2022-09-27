@@ -212,4 +212,18 @@ public class HarvestController {
 			return new ResponseObj(500, "0");
 		}
 	}
+	
+	@RequestMapping(value = "/harvest/list_harvest_by_month", method = RequestMethod.POST)
+	public @ResponseBody ResponseObj do_listDetailHarvestByMonth(@RequestBody String month) {
+		List<Harvest> harvest = null;
+		try {
+			HarvestManager hm = new HarvestManager();
+			System.out.println(month);
+			harvest = hm.listDetailHarvestByMonth(month);
+			return new ResponseObj(200, harvest);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseObj(500, harvest);
+	}
 }

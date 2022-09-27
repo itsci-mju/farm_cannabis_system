@@ -4,15 +4,20 @@
     <!--URL-->
     <!--HOME
     <string name="root_url">http://192.168.1.53:8080/ProjectFinal</string>-->
-    <!--DORMITORY Chomtawan 1
-    <string name="root_url">http:/172.16.3.128:8080/ProjectFinal</string>-->
-    <!--DORMITORY Chomtawan 2-->
-    <string name="root_url">http:/172.16.3.157:8080/ProjectFinal</string>
+    <!--DORMITORY Chomtawan 2.4 GHz
+    <string name="root_url">http:/172.16.3.157:8080/ProjectFinal</string>-->
+    <!--DORMITORY Chomtawan 5.0 GHz-->
+    <string name="root_url">http:/172.16.2.153:8080/ProjectFinal</string>
+    <!--UNIVERSITY MJU_WLAN BY TRUE
+    <string name="root_url">http:/10.100.22.97:8080/ProjectFinal</string>-->
+    <!--Hotspot Bas
+    <string name="root_url">http:/172.20.10.5:8080/ProjectFinal</string>-->
 
     <!--USER-->
     <string name="insert_user">/user/add</string>
     <string name="login_url">/user/login</string>
     <string name="get_user">/user/get_user</string>
+    <string name="check_duplicate_username">/user/check_duplicate_username</string>
     <string name="get_usertype">/user/get_user_type</string>
     <string name="list_user">/user/list</string>
 
@@ -67,6 +72,8 @@
     <string name="listdetail_harvest">/harvest/listdetail</string>
     <string name="deletedetail_harvest">/harvest/deletedetail</string>
     <string name="list_harvest_group_by_harvestid">/harvest/list_harvest_group_by_harvestid</string>
+    <string name="list_harvest_by_month">/harvest/list_harvest_by_month</string>
+
 
     <!--PLANTING PROGRESS-->
     <string name="list_all_plantingprogress">/plantingprogress/alllist</string>

@@ -61,15 +61,18 @@ public class PlantingController {
 			double pay = Double.parseDouble(map.get("pay"));
 			double discard = Double.parseDouble(map.get("discard"));
 			double plant = Double.parseDouble(map.get("plant"));
-			int area = Integer.parseInt(map.get("area"));
-			String unit = map.get("unit");
+			int sqaure_meters = Integer.parseInt(map.get("sqaure_meters"));
+			int sqaure_wa = Integer.parseInt(map.get("sqaure_wa"));
+			int ngar = Integer.parseInt(map.get("ngar"));
+			int rai = Integer.parseInt(map.get("rai"));
 			String cropid = map.get("cropid");
 			String how_plant = map.get("how_plant");
 			String note = map.get("note");
+			String status = map.get("status");
 			
 			System.out.println(plantID + " " + plantDate + " " + exp_harvestDate + " " + pay + " " + discard + " "
-					+ plant + " " + area + " " + unit + " " + cropid + " " + how_plant  + " " + note);
-			planting = new Planting(plantID, plantDate, exp_harvestDate, pay, discard, plant, area, unit, cropid, how_plant, note);
+					+ plant + " " + sqaure_meters + " " + sqaure_wa + " " + ngar + " " + rai + " " + cropid + " " + how_plant  + " " + note  + " " + status);
+			planting = new Planting(plantID, plantDate, exp_harvestDate, pay, discard, plant, sqaure_meters, sqaure_wa, ngar, rai, cropid, how_plant, note, status);
 			PlantingManager pm = new PlantingManager();
 			message = pm.insert_planting(planting);
 			return new ResponseObj(200, planting);
@@ -91,15 +94,18 @@ public class PlantingController {
 			double pay = Double.parseDouble(map.get("pay"));
 			double discard = Double.parseDouble(map.get("discard"));
 			double plant = Double.parseDouble(map.get("plant"));
-			int area = Integer.parseInt(map.get("area"));
-			String unit = map.get("unit");
+			int sqaure_meters = Integer.parseInt(map.get("sqaure_meters"));
+			int sqaure_wa = Integer.parseInt(map.get("sqaure_wa"));
+			int ngar = Integer.parseInt(map.get("ngar"));
+			int rai = Integer.parseInt(map.get("rai"));
 			String cropid = map.get("cropid");
 			String how_plant = map.get("how_plant");
 			String note = map.get("note");
+			String status = map.get("status");
 			
 			System.out.println(plantID + " " + plantDate + " " + exp_harvestDate + " " + pay + " " + discard + " "
-					+ plant + " " + area + " " + unit + " " + cropid + " " + how_plant  + " " + note);
-			planting = new Planting(plantID, plantDate, exp_harvestDate, pay, discard, plant, area, unit, cropid, how_plant, note);
+					+ plant + " " + sqaure_meters + " " + sqaure_wa + " " + ngar + " " + rai + " " + cropid + " " + how_plant  + " " + note  + " " + status);
+			planting = new Planting(plantID, plantDate, exp_harvestDate, pay, discard, plant, sqaure_meters, sqaure_wa, ngar, rai, cropid, how_plant, note, status);
 			PlantingManager pm = new PlantingManager();
 			message = pm.update_planting(planting);
 			return new ResponseObj(200, planting);
@@ -121,14 +127,17 @@ public class PlantingController {
 			double pay = Double.parseDouble(map.get("pay"));
 			double discard = Double.parseDouble(map.get("discard"));
 			double plant = Double.parseDouble(map.get("plant"));
-			int area = Integer.parseInt(map.get("area"));
-			String unit = map.get("unit");
+			int sqaure_meters = Integer.parseInt(map.get("sqaure_meters"));
+			int sqaure_wa = Integer.parseInt(map.get("sqaure_wa"));
+			int ngar = Integer.parseInt(map.get("ngar"));
+			int rai = Integer.parseInt(map.get("rai"));
 			String cropid = map.get("cropid");
 			String how_plant = map.get("how_plant");
 			String note = map.get("note");
+			String status = map.get("status");
 			
 			PlantingManager pm = new PlantingManager();
-			planting = new Planting(plantID, plantDate, exp_harvestDate, pay, discard, plant, area, unit, cropid, how_plant, note);
+			planting = new Planting(plantID, plantDate, exp_harvestDate, pay, discard, plant, sqaure_meters, sqaure_wa, ngar, rai, cropid, how_plant, note, status);
 			message = pm.delete_planting(planting);
 			if ("successfully delete".equals(message)) {
 				return new ResponseObj(200, "1");

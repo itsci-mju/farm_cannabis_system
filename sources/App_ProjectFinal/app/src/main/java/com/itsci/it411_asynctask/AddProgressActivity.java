@@ -53,15 +53,6 @@ public class AddProgressActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String plantid = intent.getStringExtra("plantid");
-        String plantingdate = intent.getStringExtra("plantingdate");
-        String pay = intent.getStringExtra("pay");
-        String discard = intent.getStringExtra("discard");
-        String plant = intent.getStringExtra("plant");
-        String area = intent.getStringExtra("area");
-        String unit = intent.getStringExtra("unit");
-        String cropid = intent.getStringExtra("cropid");
-        String how_plant = intent.getStringExtra("how_plant");
-        String note = intent.getStringExtra("note");
 
         TextView txtid = findViewById(R.id.txtid);
         txtid.setText(plantid);
@@ -157,7 +148,7 @@ public class AddProgressActivity extends AppCompatActivity {
                 }
             }
         }, mYear, mMonth, mDay);
-
+        dpd.getDatePicker().setMaxDate(c.getTimeInMillis());
         dpd.show();
     }
 

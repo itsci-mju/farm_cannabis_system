@@ -97,7 +97,7 @@ public class OrderManager {
 			SessionFactory sessionFactory = HibernateConnection.doHibernateConnection();
 			Session session = sessionFactory.openSession();
 			Transaction t = session.beginTransaction();
-			session.createQuery("UPDATE Order SET status = '�׹�ѹ����' "
+			session.createQuery("UPDATE Order SET status = 'ยืนยันแล้ว' "
 					+ "where orderid = '" + orderid + "'").executeUpdate();
 			t.commit();
 			session.close();

@@ -33,11 +33,14 @@ public class PlantingModel {
         String pay;
         String discard;
         String plant;
-        String area;
-        String unit;
+        String sqaure_meters;
+        String sqaure_wa;
+        String ngar;
+        String rai;
         String cropid;
         String how_plant;
         String note;
+        String status;
 
         public String getPlantID() {
             return plantID;
@@ -87,20 +90,36 @@ public class PlantingModel {
             this.plant = plant;
         }
 
-        public String getArea() {
-            return area;
+        public String getSqaure_meters() {
+            return sqaure_meters;
         }
 
-        public void setArea(String area) {
-            this.area = area;
+        public void setSqaure_meters(String sqaure_meters) {
+            this.sqaure_meters = sqaure_meters;
         }
 
-        public String getUnit() {
-            return unit;
+        public String getSqaure_wa() {
+            return sqaure_wa;
         }
 
-        public void setUnit(String unit) {
-            this.unit = unit;
+        public void setSqaure_wa(String sqaure_wa) {
+            this.sqaure_wa = sqaure_wa;
+        }
+
+        public String getNgar() {
+            return ngar;
+        }
+
+        public void setNgar(String ngar) {
+            this.ngar = ngar;
+        }
+
+        public String getRai() {
+            return rai;
+        }
+
+        public void setRai(String rai) {
+            this.rai = rai;
         }
 
         public String getCropid() {
@@ -125,6 +144,14 @@ public class PlantingModel {
 
         public void setNote(String note) {
             this.note = note;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
         }
     }
 }

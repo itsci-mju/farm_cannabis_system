@@ -87,21 +87,21 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value = "/user/get_userbyusername", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseObj do_getUserByUsername(@RequestBody String username) {
+	@RequestMapping(value = "/user/check_duplicate_username", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseObj do_checkDuplicateUsername(@RequestBody String username) {
 		String message = "";
 		User user = null;
 		try {
 			System.out.println(username);
 			UserManager um = new UserManager();
-			user = um.getUserByUsername(username);
+			user = um.checkDuplicateUsername(username);
 			
 			System.out.println(user.toString());
-			return new ResponseObj(200, user);
+			return new ResponseObj(200, "duplicate");
 		} catch (Exception e) {
 			e.printStackTrace();
 			message = "Please try again....";
-			return new ResponseObj(500, "0");
+			return new ResponseObj(200, "0");
 		}
 	}
 	

@@ -66,7 +66,7 @@ public class RequestRegisterManager {
 			SessionFactory sessionFactory = HibernateConnection.doHibernateConnection();
 			Session session = sessionFactory.openSession();
 			Transaction t = session.beginTransaction();
-			session.createQuery("UPDATE RequestRegister SET status = '�׹�ѹ����' "
+			session.createQuery("UPDATE RequestRegister SET status = 'ยืนยันแล้ว' "
 					+ "where reqregid = '" + registerid + "'").executeUpdate();
 			t.commit();
 			session.close();
@@ -81,7 +81,7 @@ public class RequestRegisterManager {
 			SessionFactory sessionFactory = HibernateConnection.doHibernateConnection();
 			Session session = sessionFactory.openSession();
 			Transaction t = session.beginTransaction();
-			session.createQuery("UPDATE RequestRegister SET status = '�١����ʸ' "
+			session.createQuery("UPDATE RequestRegister SET status = 'ถูกปฏิเสธ' "
 					+ "where reqregid = '" + registerid + "'").executeUpdate();
 			t.commit();
 			session.close();

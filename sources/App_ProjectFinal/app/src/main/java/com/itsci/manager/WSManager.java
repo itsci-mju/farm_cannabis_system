@@ -141,6 +141,34 @@ public class WSManager {
         task.execute(context.getString(R.string.get_user), userModel.toJSONString());
     }
 
+    public void check_duplicate_username(String username, final WSManagerListener listener) {
+        if (!(username instanceof String)) {
+            return;
+        }
+        WSTask task = new WSTask(this.context,new WSTask.WSTaskListener() {
+            @Override
+            public void onComplete(String response) {
+                Log.e("response ", response);
+                String jarr = null;
+                try {
+                    JSONObject json = new JSONObject(response);
+                    jarr = (String) json.get("result");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                listener.onComplete(jarr);
+            }
+
+            @Override
+            public void onError(String err) {
+                listener.onError(err);
+            }
+        });
+        Log.d("data ", username);
+        task.execute(context.getString(R.string.check_duplicate_username), username);
+    }
+
     public void getUserType(String username, final WSManagerListener listener) {
         if (!(username instanceof String)) {
             return;
@@ -1203,6 +1231,37 @@ public class WSManager {
 
         Log.d("data ", harvestModel.toJSONString());
         task.execute(context.getString(R.string.deletedetail_harvest), harvestModel.toJSONString());
+    }
+
+    public void listHarvestByMonth(String month, final WSManagerListener listener) {
+        if (!(month instanceof String)) {
+            return;
+        }
+        WSTask task = new WSTask(this.context,new WSTask.WSTaskListener() {
+            @Override
+            public void onComplete(String response) {
+                Log.d("search ", response);
+                JSONArray jarr = null;
+                try {
+                    JSONObject json = new JSONObject(response);
+                    jarr = (JSONArray) json.get("result");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Gson gson = new Gson();
+                HarvestModel2.Harvest[] harvestArray = gson.fromJson(jarr.toString(), HarvestModel2.Harvest[].class);
+
+                listener.onComplete(harvestArray);
+            }
+
+            @Override
+            public void onError(String err) {
+                listener.onError(err);
+            }
+        });
+
+        task.execute(context.getString(R.string.list_harvest_by_month), month);
     }
 
     //Planting Progress

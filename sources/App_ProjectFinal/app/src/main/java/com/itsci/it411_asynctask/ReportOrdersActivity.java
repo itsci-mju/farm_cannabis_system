@@ -15,17 +15,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.anychart.AnyChart;
-import com.anychart.AnyChartView;
-import com.anychart.chart.common.dataentry.DataEntry;
-import com.anychart.chart.common.dataentry.ValueDataEntry;
-import com.anychart.charts.Pie;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -35,19 +29,20 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.itsci.manager.WSManager;
-import com.itsci.model.OrderDetailModel;
 import com.itsci.model.OrderDetailModel2;
-import com.itsci.model.OrderModel;
 import com.itsci.model.OrderModel2;
 import com.itsci.model.ProductModel;
 
+import org.w3c.dom.Text;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Vector;
 
 public class ReportOrdersActivity extends AppCompatActivity {
+    DecimalFormat formatter = new DecimalFormat("###,###,###.00");
+
     private PieChart pieChart;
 
     @Override
@@ -136,8 +131,9 @@ public class ReportOrdersActivity extends AppCompatActivity {
                             public void onComplete(Object response) {
                                 ProductModel.Product[] p = (ProductModel.Product[]) response;
 
+                                final double[] totalsum = {0};
                                 for(int i = 0; i < p.length; i++){
-                                    View v = getLayoutInflater().inflate(R.layout.list_detail_order_in_report, null);
+                                    final View v = getLayoutInflater().inflate(R.layout.list_detail_order_in_report, null);
 
                                     TextView productname = v.findViewById(R.id.productname);
                                     productname.setText(p[i].getProductname());
@@ -159,10 +155,29 @@ public class ReportOrdersActivity extends AppCompatActivity {
                                             TextView qty = v.findViewById(R.id.qty);
                                             qty.setText(String.valueOf(totalqty));
 
-                                            TextView unit = v.findViewById(R.id.unit);
-                                            unit.setText("กิโลกรัม");
+                                            double sum = 0;
+
+                                            for(int i = 0; i < list.length; i++) {
+                                                if(list[i].getProduct().getProductname().equals(productname.getText().toString())) {
+                                                    sum = totalqty * Double.parseDouble(list[i].getProduct().getPrice());
+                                                    totalsum[0] += sum;
+                                                    break;
+                                                }
+
+                                            }
+
+                                            TextView sumprice = v.findViewById(R.id.sumprice);
+                                            if(sum > 0){
+                                                sumprice.setText(formatter.format(sum));
+                                            }else{
+                                                sumprice.setText("0.00");
+                                            }
+
+                                            TextView txttotalsum = findViewById(R.id.totalsum);
+                                            txttotalsum.setText(formatter.format(totalsum[0]));
 
                                             ll.addView(v);
+
                                         }
 
                                         @Override
@@ -181,13 +196,16 @@ public class ReportOrdersActivity extends AppCompatActivity {
 
                         LinearLayout ll_piechart_order = findViewById(R.id.ll_piechart_order);
                         CardView cv_detail_order = findViewById(R.id.cv_detail_order);
+                        CardView cv_total_receive = findViewById(R.id.cv_total_receive);
 
                         if(list.length > 0){
                             ll_piechart_order.setVisibility(View.VISIBLE);
                             cv_detail_order.setVisibility(View.VISIBLE);
+                            cv_total_receive.setVisibility(View.VISIBLE);
                         }else{
                             ll_piechart_order.setVisibility(View.GONE);
                             cv_detail_order.setVisibility(View.GONE);
+                            cv_total_receive.setVisibility(View.VISIBLE);
                         }
                     }
 
