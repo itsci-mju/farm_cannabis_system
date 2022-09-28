@@ -7,7 +7,7 @@
     <!--DORMITORY Chomtawan 2.4 GHz
     <string name="root_url">http:/172.16.3.157:8080/ProjectFinal</string>-->
     <!--DORMITORY Chomtawan 5.0 GHz-->
-    <string name="root_url">http:/172.16.2.153:8080/ProjectFinal</string>
+    <string name="root_url">http:/172.16.2.155:8080/ProjectFinal</string>
     <!--UNIVERSITY MJU_WLAN BY TRUE
     <string name="root_url">http:/10.100.22.97:8080/ProjectFinal</string>-->
     <!--Hotspot Bas
