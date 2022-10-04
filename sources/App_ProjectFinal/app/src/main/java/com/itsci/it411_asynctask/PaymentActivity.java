@@ -61,7 +61,7 @@ public class PaymentActivity extends AppCompatActivity {
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
-        int hour = c.get(Calendar.HOUR);
+        int hour = c.getTime().getHours();
         int minute = c.get(Calendar.MINUTE);
 
         EditText edt = findViewById(R.id.txtpaydate);
@@ -76,15 +76,7 @@ public class PaymentActivity extends AppCompatActivity {
         }
 
         EditText edt2 = findViewById(R.id.txtpaytime);
-        if(hour < 10 && minute < 10) {
-            edt2.setText("0" + hour + ":0" + minute);
-        }else if(hour < 10 && minute >= 10){
-            edt2.setText("0" + hour + ":" + minute);
-        }else if(hour >= 10 && minute < 10){
-            edt2.setText("0" + hour + ":" + minute);
-        }else {
-            edt2.setText(hour + ":" + minute);
-        }
+        edt2.setText(hour + ":" + minute);
 
         Intent intent = getIntent();
         String orderid =  intent.getStringExtra("orderid");

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -29,6 +30,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.itsci.manager.WSManager;
+import com.itsci.model.HarvestModel2;
 import com.itsci.model.OrderDetailModel2;
 import com.itsci.model.OrderModel2;
 import com.itsci.model.ProductModel;
@@ -125,11 +127,95 @@ public class ReportOrdersActivity extends AppCompatActivity {
                         LinearLayout ll = findViewById(R.id.list_detail_order_in_report);
                         ll.removeAllViews();
 
+                        LinearLayout lp = findViewById(R.id.list_partname_in_report_orders);
+                        lp.removeAllViews();
+
+                        String list_partname[] = {"ใบ", "ราก", "ลำต้น", "ยอดอ่อน"};
+
                         ProductModel productModel = new ProductModel();
                         manager.listProduct(productModel, new WSManager.WSManagerListener() {
                             @Override
                             public void onComplete(Object response) {
                                 ProductModel.Product[] p = (ProductModel.Product[]) response;
+
+                                /*for(int i = 0; i < list_partname.length; i++){
+                                    int sum = 0;
+                                    View v = lp.getChildAt(i);
+                                    for(int j = 0; j < p.length; j++) {
+                                        if (p[j].getProductname().contains(list_partname[i])) {
+                                            sum++;
+                                        }
+
+                                        if(sum == 1) {
+                                            TextView partname = v.findViewById(R.id.partname);
+                                            partname.setText(list_partname[i]);
+                                        }
+                                    }
+
+                                    ViewGroup.LayoutParams params = v.getLayoutParams();
+                                    params.height = 79*sum;
+                                    v.setLayoutParams(params);
+                                }*/
+
+                                manager.listHarvestByYear(spinner_year.getSelectedItem().toString(), new WSManager.WSManagerListener() {
+                                    @Override
+                                    public void onComplete(Object response) {
+                                        HarvestModel2.Harvest[] list = (HarvestModel2.Harvest[]) response;
+
+                                        for (int i = 0; i < p.length; i++) {
+                                            View v = getLayoutInflater().inflate(R.layout.list_partname_in_report_orders, null);
+                                            TextView partname = v.findViewById(R.id.partname);
+                                            partname.setText("");
+
+                                            TextView harvest = v.findViewById(R.id.harvest);
+                                            harvest.setText("");
+
+                                            CardView cv = v.findViewById(R.id.CV);
+                                            cv.setCardElevation(0);
+
+                                            lp.addView(v);
+                                        }
+
+                                        int sum = 0;
+
+                                        for (int i = 0; i < list_partname.length; i++) {
+                                            int no = 0;
+                                            View v = lp.getChildAt(sum);
+                                            for (int j = 0; j < p.length; j++) {
+                                                if (p[j].getProductname().contains(list_partname[i])) {
+                                                    if (no == 0) {
+                                                        TextView partname = v.findViewById(R.id.partname);
+                                                        partname.setText(list_partname[i]);
+
+                                                        double sumharvest = 0;
+
+                                                        for(int k = 0; k < list.length; k++){
+                                                            if(list[k].getPartName().equals(list_partname[i])){
+                                                                sumharvest += Double.parseDouble(list[k].getQty());
+                                                            }
+                                                        }
+                                                        TextView harvest = v.findViewById(R.id.harvest);
+                                                        harvest.setText(String.valueOf(sumharvest));
+                                                    }
+                                                    sum++;
+                                                    no++;
+                                                }
+                                                View v1 = lp.getChildAt(sum-1);
+                                                CardView cv = v1.findViewById(R.id.CV);
+                                                if(j == no){
+                                                    cv.setCardElevation(5);
+                                                }else if(j == p.length-1){
+                                                    cv.setCardElevation(5);
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(String err) {
+
+                                    }
+                                });
 
                                 final double[] totalsum = {0};
                                 for(int i = 0; i < p.length; i++){
@@ -147,7 +233,7 @@ public class ReportOrdersActivity extends AppCompatActivity {
                                             int totalqty = 0;
 
                                             for(int i = 0; i < list.length; i++){
-                                                if(list[i].getProduct().getProductname().equals(productname.getText().toString())){
+                                                if(list[i].getProduct().getProductname().equals(productname.getText().toString()) && list[i].getOrder().getStatus().equals("ชำระเงินแล้ว")){
                                                     totalqty += Double.parseDouble(list[i].getQty());
                                                 }
                                             }
@@ -158,7 +244,7 @@ public class ReportOrdersActivity extends AppCompatActivity {
                                             double sum = 0;
 
                                             for(int i = 0; i < list.length; i++) {
-                                                if(list[i].getProduct().getProductname().equals(productname.getText().toString())) {
+                                                if(list[i].getProduct().getProductname().equals(productname.getText().toString())  && list[i].getOrder().getStatus().equals("ชำระเงินแล้ว")) {
                                                     sum = totalqty * Double.parseDouble(list[i].getProduct().getPrice());
                                                     totalsum[0] += sum;
                                                     break;
@@ -205,7 +291,7 @@ public class ReportOrdersActivity extends AppCompatActivity {
                         }else{
                             ll_piechart_order.setVisibility(View.GONE);
                             cv_detail_order.setVisibility(View.GONE);
-                            cv_total_receive.setVisibility(View.VISIBLE);
+                            cv_total_receive.setVisibility(View.GONE);
                         }
                     }
 

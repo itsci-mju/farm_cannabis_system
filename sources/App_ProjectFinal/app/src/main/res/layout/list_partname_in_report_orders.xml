@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F8F8F8">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,10 +16,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/CV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp">
+            android:layout_marginBottom="2dp"
+            android:background="#F8F8F8"
+            android:backgroundTint="#F8F8F8"
+            app:cardBackgroundColor="#F8F8F8">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -30,39 +35,32 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="#F8F8F8"
                     android:gravity="center">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:backgroundTint="#F8F8F8"
                         android:gravity="center">
 
                         <TextView
-                            android:id="@+id/productname"
-                            android:layout_width="120dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:gravity="center"
-                            android:text="0"
-                            android:textColor="#000000"
-                            android:textSize="10sp" />
-
-                        <TextView
-                            android:id="@+id/qty"
-                            android:layout_width="55dp"
+                            android:id="@+id/partname"
+                            android:layout_width="50dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="0"
+                            android:textAlignment="center"
                             android:textColor="#000000"
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/sumprice"
-                            android:layout_width="70dp"
+                            android:id="@+id/harvest"
+                            android:layout_width="55dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="25dp"
-                            android:text="TextView"
-                            android:textAlignment="textEnd"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center"
+                            android:text="0"
                             android:textColor="#000000"
                             android:textSize="12sp" />
 

@@ -13,8 +13,10 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/bottom_menubar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -331,40 +333,76 @@
                             android:padding="5dp">
 
                             <TextView
+                                android:id="@+id/textView145"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="ชิ้นส่วน"
+                                android:textColor="#000000"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/textView155"
+                                android:layout_width="65dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="เก็บเกี่ยว (กิโลกรัม)"
+                                android:textColor="#000000"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <TextView
                                 android:id="@+id/textView140"
-                                android:layout_width="150dp"
+                                android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="ชื่อสินค้า"
                                 android:textColor="#000000"
+                                android:textSize="12sp"
                                 android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/textView142"
-                                android:layout_width="100dp"
+                                android:layout_width="65dp"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="จำนวน (กิโลกรัม)"
+                                android:text="สั่งจอง (กิโลกรัม)"
                                 android:textColor="#000000"
+                                android:textSize="12sp"
                                 android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/textView152"
-                                android:layout_width="100dp"
+                                android:layout_width="80dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
                                 android:gravity="center"
                                 android:text="รวม (บาท)"
                                 android:textColor="#000000"
+                                android:textSize="12sp"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/list_detail_order_in_report"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"></LinearLayout>
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:id="@+id/list_partname_in_report_orders"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/list_detail_order_in_report"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"></LinearLayout>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -403,7 +441,7 @@
                                 android:id="@+id/totalsum"
                                 android:layout_width="95dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginRight="25dp"
+                                android:layout_marginRight="20dp"
                                 android:gravity="center"
                                 android:text="0.00"
                                 android:textAlignment="textEnd"
